@@ -1,0 +1,7 @@
+boto3
+mysql-connector-python
+awscli
+requests
+azure-identity
+azure-mgmt-subscription
+azure-mgmt-compute
