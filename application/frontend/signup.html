@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup Page</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div class="signup-container">
+        <img src="logo.gif" alt="Logo" class="logo signup-logo">
+        <h2>Signup</h2>
+        <form id="signup-form">
+            <input type="text" id="username" placeholder="Username" required/>
+            <input type="email" id="email" placeholder="Email" required/>
+            <input type="password" id="password" placeholder="Password" required/>
+            <input type="password" id="confirm-password" placeholder="Confirm Password" required/>
+            <div class="signup-button-container">
+                <input type="submit" value="Signup"/>
+            </div>
+        </form>
+        <div class="signup-redirect">
+            <p>Already have an account?</p>
+            <div class="login-button-container">
+                <a href="login/login.html" class="login-button">Log In</a>
+            </div>
+        </div>
+    </div>
+    <script src="signup.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+        /* Additional styles for login.html */
+        .login-logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <img src="logo.gif" alt="Logo" class="logo login-logo">
+        <h2>Login</h2>
+        <form id="login-form">
+            <input type="text" id="username" placeholder="Username or Email" required/>
+            <input type="password" id="password" placeholder="Password" required/>
+            <input type="submit" value="Login"/>
+        </form>
+        <div class="signup-redirect">
+            <p>Don't have an account?</p>
+            <a href="../signup.html">Sign Up</a>
+        </div>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html>
