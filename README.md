@@ -1,4 +1,4 @@
-
+![logo](https://github.com/9846381903/cloudash/assets/90718392/9c40ef18-a096-4fb7-b3b0-fb4a7f9d1701)
 
 # Cloudash: Optimal VM Deployment Solution
 
@@ -64,9 +64,8 @@ Serving as the main gateway for all operations, this controller:
 
 ## Architecture Diagram
 
-
+![archetecture](https://github.com/9846381903/cloudash/assets/90718392/7c2af1bc-c49d-41f8-a740-161e53817535)
 
 ## Database Schema
 
-
-
+![database](https://github.com/9846381903/cloudash/assets/90718392/b0ea03ae-f65e-4541-b3a2-6938e3686a9b)
