@@ -1,0 +1,48 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: intelligent-controller
+spec:
+  rules:
+  - host: console.clockhash.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: intelligent-controller
+            port:
+              number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ui-ux
+spec:
+  rules:
+  - host: console.clockhash.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /signup
+        backend:
+          service:
+            name: ui-ux
+            port:
+              number: 80
+      - pathType: Prefix
+        path: /login
+        backend:
+          service:
+            name: ui-ux
+            port:
+              number: 80
+      - pathType: Prefix
+        path: /console
+        backend:
+          service:
+            name: ui-ux
+            port:
+              number: 80
+

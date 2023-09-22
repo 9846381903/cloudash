@@ -1,0 +1,163 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-api-1.0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-api-1.0
+  template:
+    metadata:
+      labels:
+        app: inventory-api-1.0
+    spec:
+      imagePullSecrets:
+      - name: registry-credentials
+      containers:
+      - name: inventory-api
+        image: registry.gitlab.com/9846381903/inventory_api:3.7
+        envFrom:
+        - secretRef:
+            name: mysecret
+        command:
+        - /bin/bash
+        - -c
+        - python3 module.py
+        imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aws-operation-1.0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aws-operation-1.0
+  template:
+    metadata:
+      labels:
+        app: aws-operation-1.0
+    spec:
+      imagePullSecrets:
+      - name: registry-credentials
+      containers:
+      - name: aws-operation
+        image: registry.gitlab.com/9846381903/aws-operation:3.7
+        envFrom:
+        - secretRef:
+            name: mysecret
+        - secretRef:
+            name: aws-secret
+        command:
+        - /bin/bash
+        - -c
+        - python3 module.py
+        imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: azure-operation-1.0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: azure-operation-1.0
+  template:
+    metadata:
+      labels:
+        app: azure-operation-1.0
+    spec:
+      imagePullSecrets:
+      - name: registry-credentials
+      containers:
+      - name: azure-operation
+        image: registry.gitlab.com/9846381903/azure-operation:3.7
+        envFrom:
+        - secretRef:
+            name: mysecret
+        - secretRef:
+            name: azure-secret
+        command:
+        - /bin/bash
+        - -c
+        - python3 module.py
+        imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: intelligent-controller-1.0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: intelligent-controller-1.0
+  template:
+    metadata:
+      labels:
+        app: intelligent-controller-1.0
+    spec:
+      imagePullSecrets:
+      - name: registry-credentials
+      containers:
+      - name: intelligent-controller
+        image: registry.gitlab.com/9846381903/intelligent_controller:3.8
+        envFrom:
+        - secretRef:
+            name: mysecret
+        - secretRef:
+            name: aws-secret
+        - secretRef:
+            name: azure-secret
+        env:
+        - name: API_ENDPOINT
+          value: "http://inventory-api"
+        - name: AWS_API_ENDPOINT
+          value: "http://aws-operation"
+        - name: AZURE_API_ENDPOINT
+          value: "http://azure-operation"
+        - name: REGISTER_API_ENDPOINT
+          value: "http://rest-api"
+        - name: AUTHENTICATE_API_ENDPOINT
+          value: "http://rest-api"
+        command:
+        - /bin/bash
+        - -c
+        - python3 module.py
+        imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rest-api-1.0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rest-api-1.0
+  template:
+    metadata:
+      labels:
+        app: rest-api-1.0
+    spec:
+      imagePullSecrets:
+      - name: registry-credentials
+      containers:
+      - name: rest-api
+        image: registry.gitlab.com/9846381903/rest_api:4.8
+        envFrom:
+        - secretRef:
+            name: mysecret
+        command:
+        - /bin/bash
+        - -c
+        - python3 module.py
+        imagePullPolicy: IfNotPresent
+      restartPolicy: Always

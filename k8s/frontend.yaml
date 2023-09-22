@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ui-ux-1.0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ui-ux-1.0
+  template:
+    metadata:
+      labels:
+        app: ui-ux-1.0
+    spec:
+      imagePullSecrets:
+        - name: registry-credentials
+      containers:
+        - name: ui-ux
+          image: registry.gitlab.com/9846381903/ui-ux:2.0
+          ports:
+            - containerPort: 80
+          imagePullPolicy: IfNotPresent
+

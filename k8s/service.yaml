@@ -1,0 +1,87 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+spec:
+  selector:
+    app: mysql
+  ports:
+    - name: tcp
+      protocol: TCP
+      port: 3306
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-api
+spec:
+  selector:
+    app: inventory-api-1.0
+  ports:
+    - name: http
+      port: 80
+      targetPort: 5001
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aws-operation
+spec:
+  selector:
+    app: aws-operation-1.0
+  ports:
+    - name: http
+      port: 80
+      targetPort: 5002
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: azure-operation
+spec:
+  selector:
+    app: azure-operation-1.0
+  ports:
+    - name: http
+      port: 80
+      targetPort: 5003
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rest-api
+spec:
+  selector:
+    app: rest-api-1.0
+  ports:
+    - name: http
+      port: 80
+      targetPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: intelligent-controller
+spec:
+  type: NodePort
+  selector:
+    app: intelligent-controller-1.0
+  ports:
+    - nodePort: 30951
+      port: 80
+      targetPort: 5004
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ui-ux
+spec:
+  type: NodePort
+  selector:
+    app: ui-ux-1.0
+  ports:
+    - nodePort: 30952
+      port: 80
+      targetPort: 80

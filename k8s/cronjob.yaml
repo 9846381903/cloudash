@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: vm-inventory-1.0
+spec:
+  schedule: "0 13 * * 1-5"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          imagePullSecrets:
+          - name: registry-credentials
+          containers:
+          - name: vm-inventory
+            image: registry.gitlab.com/9846381903/vm_inventory:3.7
+            envFrom:
+            - secretRef:
+                name: aws-secret
+            - secretRef:
+                name: mysecret
+            - secretRef:
+                name: azure-secret
+            command:
+            - /bin/bash
+            - -c
+            - |
+              python3 aws_region.py &
+              python3 az_region.py &
+              python3 aws_price.py &
+              python3 az_price.py
+            imagePullPolicy: IfNotPresent
+          restartPolicy: OnFailure
+
